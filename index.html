@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla Weather App | Amanda Machado</title>
+    <!-- Axios API -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,12 +42,12 @@
       </header>
       <main>
         <div class="weather-today">
-          <h1>Florence</h1>
-          <h2><span id="today-temp">34</span>˚C</h2>
-          <div class="today-description" id="today-description">Clear</div>
+          <h1 id="city"></h1>
+          <h2><span id="today-temp"></span>˚C</h2>
+          <div class="today-description" id="today-description"></div>
           <div class="today-min-max">
-            <span class="max-temp" id="today-max-temp">37˚</span> |
-            <span class="min-temp" id="today-min-temp">25˚</span>
+            <span class="max-temp" id="today-max-temp"></span>˚|
+            <span class="min-temp" id="today-min-temp"></span>˚
           </div>
           <div class="current-dayandtime" id="current-dayandtime">
             <span id="current-day">Monday</span>
@@ -53,11 +55,14 @@
           </div>
 
           <div class="today-details">
+            <div class="today-feelslike">
+              Feels like: <span id="feelslike"></span>˚
+            </div>
             <div class="today-humidity">
-              Humidity: <span id="humidity">34%</span>
+              Humidity: <span id="humidity"></span>%
             </div>
             <div class="today-windspeed">
-              Wind speed: <span id="windspeed">2km/h</span>
+              Wind speed: <span id="windspeed"></span> km/h
             </div>
           </div>
         </div>
