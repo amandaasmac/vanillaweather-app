@@ -30,16 +30,19 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = celsiusTemperature;
 
   let maxTempElement = document.querySelector("#today-max-temp");
-  maxTempElement.innerHTML = Math.round(response.data.main.temp_max);
+  celsiusMaxTemperature = Math.round(response.data.main.temp_max);
+  maxTempElement.innerHTML = celsiusMaxTemperature;
 
   let minTempElement = document.querySelector("#today-min-temp");
-  minTempElement.innerHTML = Math.round(response.data.main.temp_min);
+  celsiusMinTemperature = Math.round(response.data.main.temp_min);
+  minTempElement.innerHTML = celsiusMinTemperature;
 
   let descriptionElement = document.querySelector("#today-description");
   descriptionElement.innerHTML = response.data.weather[0].description;
 
   let feelsLikeElement = document.querySelector("#feelslike");
-  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
+  celsiusFeelsLikeTemperature = Math.round(response.data.main.feels_like);
+  feelsLikeElement.innerHTML = celsiusFeelsLikeTemperature;
 
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
@@ -70,24 +73,47 @@ function handleSubmit(event) {
   searchCity(cityInputElement.value);
 }
 
+function calculateFahrenheitTemperature(celsiusTemp) {
+  return Math.round((celsiusTemp * 9) / 5 + 32);
+}
+
 function switchUnit(event) {
   event.preventDefault();
 
-  let temperatureElement = document.querySelector("#today-temp");
   let unitElement = document.querySelector("#temp-unit");
+  let temperatureElement = document.querySelector("#today-temp");
+  let maxTempElement = document.querySelector("#today-max-temp");
+  let minTempElement = document.querySelector("#today-min-temp");
+  let feelsLikeElement = document.querySelector("#feelslike");
 
-  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let fahrenheitTemperature =
+    calculateFahrenheitTemperature(celsiusTemperature);
+  let fahrenheitMaxTemperature = calculateFahrenheitTemperature(
+    celsiusMaxTemperature
+  );
+  let fahrenheitMinTemperature = calculateFahrenheitTemperature(
+    celsiusMinTemperature
+  );
+  let fahrenheitFeelsLikeTemperature = calculateFahrenheitTemperature(
+    celsiusFeelsLikeTemperature
+  );
 
   switch (switchUnitElement.innerHTML) {
     case "˚F":
       temperatureElement.innerHTML = fahrenheitTemperature;
       switchUnitElement.innerHTML = "˚C";
+      maxTempElement.innerHTML = fahrenheitMaxTemperature;
+      minTempElement.innerHTML = fahrenheitMinTemperature;
+      feelsLikeElement.innerHTML = fahrenheitFeelsLikeTemperature;
       unitElement.innerHTML = "˚F";
 
       break;
     case "˚C":
       temperatureElement.innerHTML = celsiusTemperature;
       switchUnitElement.innerHTML = "˚F";
+      maxTempElement.innerHTML = celsiusMaxTemperature;
+      minTempElement.innerHTML = celsiusMinTemperature;
+      feelsLikeElement.innerHTML = celsiusFeelsLikeTemperature;
       unitElement.innerHTML = "˚C";
 
       break;
@@ -95,6 +121,9 @@ function switchUnit(event) {
 }
 
 let celsiusTemperature = null;
+let celsiusMaxTemperature = null;
+let celsiusMinTemperature = null;
+let celsiusFeelsLikeTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
