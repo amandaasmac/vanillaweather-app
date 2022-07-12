@@ -77,13 +77,17 @@ header {
   display: inline-block;
   width: 100%;
   padding: 12px 10px;
-  color: var(--burnt-sienna);
+  color: var(--melon);
   font-size: 1rem;
   line-height: 1.5;
   background-color: var(--ghost-white);
   background-clip: padding-box;
   border: 1px solid var(--amaranth-pink);
   border-radius: 12px 0 0 12px;
+}
+
+.search-input::placeholder {
+  color: var(--amaranth-pink);
 }
 
 button,
