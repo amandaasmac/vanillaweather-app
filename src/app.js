@@ -48,9 +48,15 @@ function displayTemperature(response) {
 
   let dateElement = document.querySelector("#current-dayandtime");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#today-icon");
+  let iconId = response.data.weather[0].id;
+  iconElement.setAttribute("src", `img/${iconId}d.png`);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "f2a962d48c46d7fc23aca5910b2db6af";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Rome&appid=${apiKey}&units=metric`;
+let city = "Rome";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
