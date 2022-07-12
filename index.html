@@ -4,21 +4,73 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla Weather App</title>
-    <!-- Bootstrap css -->
+    <title>Vanilla Weather App | Amanda Machado</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
     />
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/f17a491212.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- css -->
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Vanilla Weather App</h1>
+    <div class="app-container">
+      <header>
+        <button class="unit-switch tunit">˚F</button>
+        <form class="search-form" id="search-form">
+          <input
+            type="search"
+            name="searchcity"
+            class="search-input"
+            id="search-input"
+            placeholder="Search city..."
+          />
+          <input type="submit" value="Search" class="search-button" />
+        </form>
+        <button class="use-device-button" id="use-device-button">
+          <i class="fa-solid fa-location-dot"></i> Use device location
+        </button>
+      </header>
+      <main>
+        <div class="weather-today">
+          <h1>Florence</h1>
+          <h2><span id="today-temp">34</span>˚C</h2>
+          <div class="today-description" id="today-description">Clear</div>
+          <div class="today-min-max">
+            <span class="max-temp" id="today-max-temp">37˚</span> |
+            <span class="min-temp" id="today-min-temp">25˚</span>
+          </div>
+          <div class="current-dayandtime" id="current-dayandtime">
+            <span id="current-day">Monday</span>
+            <span id="current-time">14:00</span>
+          </div>
+
+          <div class="today-details">
+            <div class="today-humidity">
+              Humidity: <span id="humidity">34%</span>
+            </div>
+            <div class="today-windspeed">
+              Wind speed: <span id="windspeed">2km/h</span>
+            </div>
+          </div>
+        </div>
+        <div class="weather-image">
+          <img
+            src="http://www.gstatic.com/images/icons/material/apps/weather/2x/partly_cloudy_dark_color_96dp.png"
+          />
+        </div>
+      </main>
     </div>
+    <footer>
+      <small><a href="#" target="_blank">Open source code</a> by Amanda</small>
+    </footer>
     <script src="src/app.js"></script>
   </body>
 </html>
