@@ -22,6 +22,9 @@ function formatDate(timestamp) {
 }
 
 function displayTemperature(response) {
+  unitElement.innerHTML = "˚C";
+  switchUnitElement.innerHTML = "˚F";
+
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
 
@@ -80,7 +83,6 @@ function calculateFahrenheitTemperature(celsiusTemp) {
 function switchUnit(event) {
   event.preventDefault();
 
-  let unitElement = document.querySelector("#temp-unit");
   let temperatureElement = document.querySelector("#today-temp");
   let maxTempElement = document.querySelector("#today-max-temp");
   let minTempElement = document.querySelector("#today-min-temp");
@@ -106,7 +108,6 @@ function switchUnit(event) {
       minTempElement.innerHTML = fahrenheitMinTemperature;
       feelsLikeElement.innerHTML = fahrenheitFeelsLikeTemperature;
       unitElement.innerHTML = "˚F";
-
       break;
     case "˚C":
       temperatureElement.innerHTML = celsiusTemperature;
@@ -115,9 +116,20 @@ function switchUnit(event) {
       minTempElement.innerHTML = celsiusMinTemperature;
       feelsLikeElement.innerHTML = celsiusFeelsLikeTemperature;
       unitElement.innerHTML = "˚C";
-
       break;
   }
+}
+
+function getDevicePosition() {
+  navigator.geolocation.getCurrentPosition(usePosition);
+}
+
+function usePosition(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "f2a962d48c46d7fc23aca5910b2db6af";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
 }
 
 let celsiusTemperature = null;
@@ -125,10 +137,16 @@ let celsiusMaxTemperature = null;
 let celsiusMinTemperature = null;
 let celsiusFeelsLikeTemperature = null;
 
+let unitElement = document.querySelector("#temp-unit");
+unitElement.innerHTML = "˚C";
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let switchUnitElement = document.querySelector("#unit-switch");
 switchUnitElement.addEventListener("click", switchUnit);
+
+let locationButton = document.querySelector("#use-device-button");
+locationButton.addEventListener("click", getDevicePosition);
 
 searchCity("Rome");
