@@ -31,7 +31,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 .app-container {
@@ -145,6 +145,10 @@ main img {
 .today-description,
 .today-min-max {
   font-size: 1.2rem;
+}
+
+.today-description:first-letter {
+  text-transform: capitalize;
 }
 
 .today-min-max,
