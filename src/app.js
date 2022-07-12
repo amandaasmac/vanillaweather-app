@@ -26,13 +26,14 @@ function displayTemperature(response) {
   cityElement.innerHTML = response.data.name;
 
   let temperatureElement = document.querySelector("#today-temp");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemperature = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = celsiusTemperature;
 
-  let MaxTempElement = document.querySelector("#today-max-temp");
-  MaxTempElement.innerHTML = Math.round(response.data.main.temp_max);
+  let maxTempElement = document.querySelector("#today-max-temp");
+  maxTempElement.innerHTML = Math.round(response.data.main.temp_max);
 
-  let MinTempElement = document.querySelector("#today-min-temp");
-  MinTempElement.innerHTML = Math.round(response.data.main.temp_min);
+  let minTempElement = document.querySelector("#today-min-temp");
+  minTempElement.innerHTML = Math.round(response.data.main.temp_min);
 
   let descriptionElement = document.querySelector("#today-description");
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -64,12 +65,41 @@ function searchCity(city) {
 
 function handleSubmit(event) {
   event.preventDefault();
+
   let cityInputElement = document.querySelector("#search-input");
   searchCity(cityInputElement.value);
-  console.log(cityInputElement.value);
 }
 
-searchCity("Rome");
+function switchUnit(event) {
+  event.preventDefault();
+
+  let temperatureElement = document.querySelector("#today-temp");
+  let unitElement = document.querySelector("#temp-unit");
+
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+
+  switch (switchUnitElement.innerHTML) {
+    case "˚F":
+      temperatureElement.innerHTML = fahrenheitTemperature;
+      switchUnitElement.innerHTML = "˚C";
+      unitElement.innerHTML = "˚F";
+
+      break;
+    case "˚C":
+      temperatureElement.innerHTML = celsiusTemperature;
+      switchUnitElement.innerHTML = "˚F";
+      unitElement.innerHTML = "˚C";
+
+      break;
+  }
+}
+
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let switchUnitElement = document.querySelector("#unit-switch");
+switchUnitElement.addEventListener("click", switchUnit);
+
+searchCity("Rome");

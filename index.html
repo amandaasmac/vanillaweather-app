@@ -25,7 +25,7 @@
   <body>
     <div class="app-container">
       <header>
-        <button class="unit-switch tunit">˚F</button>
+        <button class="unit-switch" id="unit-switch">˚F</button>
         <form class="search-form" id="search-form">
           <input
             type="search"
@@ -42,8 +42,9 @@
       </header>
       <main>
         <div class="weather-today">
+          <h2><span id="today-temp"></span><span id="temp-unit">˚C</span></h2>
           <h1 id="city"></h1>
-          <h2><span id="today-temp"></span>˚C</h2>
+
           <div class="today-description" id="today-description"></div>
           <div class="today-min-max">
             <span class="max-temp" id="today-max-temp"></span>˚|
@@ -52,7 +53,6 @@
           <div class="current-dayandtime">
             Last updated: <span id="current-dayandtime"></span>
           </div>
-
           <div class="today-details">
             <div class="today-feelslike">
               Feels like: <span id="feelslike"></span>˚
